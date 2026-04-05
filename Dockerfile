@@ -2,8 +2,6 @@ FROM node:22-slim AS builder
 WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
-# Switch to PostgreSQL for production
-RUN sed -i 's/provider = "sqlite"/provider = "postgresql"/' prisma/schema.prisma
 RUN npm ci
 RUN npx prisma generate
 COPY tsconfig.json ./
